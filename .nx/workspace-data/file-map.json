@@ -1,0 +1,116 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.3.3",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "8037249353422744134"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "10175894702052279752"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "11934160580685414355"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "17406702432687230417"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "10093397977228577162"
+      },
+      {
+        "file": "README.md",
+        "hash": "525751090699698942"
+      },
+      {
+        "file": "angular.json",
+        "hash": "15299548074905633759"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "17589970124499355952"
+      },
+      {
+        "file": "package.json",
+        "hash": "3833250784171072767"
+      },
+      {
+        "file": "public/favicon.ico",
+        "hash": "3988961587069885523"
+      },
+      {
+        "file": "src/app/app.config.server.ts",
+        "hash": "8877246535068392678"
+      },
+      {
+        "file": "src/app/app.config.ts",
+        "hash": "8867908307425284493"
+      },
+      {
+        "file": "src/app/app.html",
+        "hash": "11358065693346708359"
+      },
+      {
+        "file": "src/app/app.routes.server.ts",
+        "hash": "17500618356136685777"
+      },
+      {
+        "file": "src/app/app.routes.ts",
+        "hash": "809736233805555256"
+      },
+      {
+        "file": "src/app/app.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/app.spec.ts",
+        "hash": "7748767442643836619"
+      },
+      {
+        "file": "src/app/app.ts",
+        "hash": "15438484356494695919"
+      },
+      {
+        "file": "src/index.html",
+        "hash": "11491473701662948824"
+      },
+      {
+        "file": "src/main.server.ts",
+        "hash": "1464688769005130320"
+      },
+      {
+        "file": "src/main.ts",
+        "hash": "10405740721546735325"
+      },
+      {
+        "file": "src/server.ts",
+        "hash": "16072833409673926991"
+      },
+      {
+        "file": "src/styles.scss",
+        "hash": "14536604381271145334"
+      },
+      {
+        "file": "tsconfig.app.json",
+        "hash": "14528535279119755086"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "17213104504590097198"
+      },
+      {
+        "file": "tsconfig.spec.json",
+        "hash": "15504553596141903120"
+      }
+    ]
+  },
+  "externalNodesHash": "10632822024688376991"
+}
