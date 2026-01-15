@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+@use './app/styles/m3-theme' as theme; // Adjust path if needed
+
+@include mat.core();
+
+// Define Light Theme
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
+  )
+));
+
+// Define Dark Theme
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: theme.$primary-palette,
+    tertiary: theme.$tertiary-palette,
+  )
+));
+
+$orange-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$orange-palette,
+  ),
+  typography: (
+    brand-family: 'Comic Sans',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
+));
+
+// Apply light theme by default
+body {
+  @include mat.all-component-themes($light-theme);
+
+  // Apply dark theme when the class is present
+  &.dark {
+    @include mat.all-component-colors($dark-theme);
+  }
+
+  &.orange {
+    @include mat.all-component-themes($orange-theme);
+  }
+}
+
+
+/* styles.css */
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the Angular root component also expands */
+app-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100vh; /* 100% of Viewport Height */
+  width: 100vw;  /* 100% of Viewport Width */
+}
