@@ -31,12 +31,8 @@ export class ThemeSwitcherComponent {
     this.currentTheme$ = this.store.select(selectCurrentTheme);
   }
 
-  changeTheme(theme: 'light' | 'dark'): void {
-    this.themeService.setTheme(theme);
-  }
-
   // Use MatSelectChange to extract the .value property
   onThemeChange(event: MatSelectChange) {
-    this.store.dispatch(setTheme({ theme: event.value }));
+    this.themeService.setTheme(event.value);
   }
 }

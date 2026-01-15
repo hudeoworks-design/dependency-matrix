@@ -26,7 +26,7 @@ export class ThemeService {
     // Remove previous theme class if any
     const body = this.document.body;
     body.classList.forEach(className => {
-      if (className.endsWith('-theme')) {
+      if (className) {
         this.renderer.removeClass(body, className);
       }
     });

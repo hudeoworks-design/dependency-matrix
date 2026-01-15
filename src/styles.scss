@@ -21,12 +21,52 @@ $dark-theme: mat.define-theme((
   )
 ));
 
+$orange-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$orange-palette,
+  ),
+  typography: (
+    brand-family: 'Comic Sans',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
+));
+
 // Apply light theme by default
-html {
+body {
   @include mat.all-component-themes($light-theme);
 
   // Apply dark theme when the class is present
   &.dark {
     @include mat.all-component-colors($dark-theme);
   }
+
+  &.orange {
+    @include mat.all-component-themes($orange-theme);
+  }
+}
+
+
+/* styles.css */
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure the Angular root component also expands */
+app-root {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-container {
+  height: 100vh; /* 100% of Viewport Height */
+  width: 100vw;  /* 100% of Viewport Width */
 }
