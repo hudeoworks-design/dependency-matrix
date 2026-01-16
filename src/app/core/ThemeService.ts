@@ -6,7 +6,8 @@ import {
   selectCurrentPalette,
   setColorPalette,
   setTheme,
-  colorPalettes
+  ColorPalettes,
+  ThemeModes
 } from './store';
 import { Observable } from 'rxjs';
 
@@ -31,15 +32,12 @@ export class ThemeService {
     this.currentPalette$.subscribe((palette) => this.applyPalette(palette));
   }
   applyPalette(palette: string): void {
-    // const htmlElement = document.documentElement;
     const body = this.document.body;
     this.renderer.setAttribute(body, 'theme', palette);
   }
 
   private applyTheme(theme: string): void {
-    // Remove previous theme class if any
     const body = this.document.body;
-
     Array.from(body.classList).forEach(className => {
       if (className) {
         this.renderer.removeClass(body, className);
@@ -50,13 +48,11 @@ export class ThemeService {
     this.renderer.addClass(body, theme);
   }
 
-  setTheme(theme: 'light' | 'dark'): void {
+  setTheme(theme: ThemeModes): void {
     this.store.dispatch(setTheme({ theme }));
   }
 
-
-
-  setColorPalette(palette: colorPalettes): void {
+  setColorPalette(palette: ColorPalettes): void {
     this.store.dispatch(setColorPalette({ palette }));
   }
 }
