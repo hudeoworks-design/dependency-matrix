@@ -1,57 +1,49 @@
-<div>
+<div class="theme-switcher-settings">
   <mat-form-field appearance="outline">
-    <mat-label>Theme</mat-label>
-    <mat-select
-      #themeSelect
-      [value]="currentTheme$ | async"
-      (selectionChange)="onThemeChange($event)"
-    >
-      <mat-select-trigger>
-        <mat-label>
-          <mat-icon [style.color]="getSelectedColor(paletteSelect.value)">
-            @if (themeSelect.value == 'light') {
-              light_mode
-            } @else {
-              dark_mode
-            }
-          </mat-icon>
+  <mat-label>Theme</mat-label>
+  <mat-select
+    #themeSelect
+    [value]="currentTheme$ | async"
+    (selectionChange)="onThemeChange($event)"
+  >
+    <mat-select-trigger>
+      <mat-label>
+        <mat-icon [style.color]="getSelectedColor()">
+          @if (themeSelect.value == 'light') { light_mode } @else { dark_mode }
+        </mat-icon>
 
-          {{ themeSelect.value | titlecase }}
-        </mat-label>
-      </mat-select-trigger>
-      <mat-option value="light">Light Mode</mat-option>
-      <mat-option value="dark">Dark Mode</mat-option>
-    </mat-select>
-  </mat-form-field>
+        {{ themeSelect.value | titlecase }}
+      </mat-label>
+    </mat-select-trigger>
+    <mat-option value="light">Light Mode</mat-option>
+    <mat-option value="dark">Dark Mode</mat-option>
+  </mat-select>
+</mat-form-field>
 
-  <mat-divider></mat-divider>
+<mat-form-field appearance="outline">
+  <mat-label>Color Palette</mat-label>
+  <mat-select
+    #paletteSelect
+    (selectionChange)="onColorPaletteChange($event)"
+    [value]="currentPalette$ | async"
+  >
+    <mat-select-trigger>
+      <mat-label>
+        <span [style.background-color]="getSelectedColor()"></span>
+        {{ paletteSelect.value | titlecase }}
+      </mat-label>
+    </mat-select-trigger>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Color Palette</mat-label>
-    <mat-select
-      #paletteSelect
-      (selectionChange)="onColorPaletteChange($event)"
-      [value]="currentPalette$ | async"
-    >
-      <mat-select-trigger>
-        <mat-label>
-          <span
-            [style.background-color]="getSelectedColor(paletteSelect.value)"
-          ></span>
-          {{ paletteSelect.value | titlecase }}
-        </mat-label>
-      </mat-select-trigger>
-
-      @for (p of palettes; track p.value) {
-      <mat-option [value]="p.value">
-        <mat-label>
-          <span [style.background-color]="p.color"></span>
-          {{ p.name }}
-        </mat-label>
-      </mat-option>
-      } @empty {
-      <mat-option disabled>No palettes available</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+    @for (p of palettes; track p.value) {
+    <mat-option [value]="p.value">
+      <mat-label>
+        <span [style.background-color]="p.color"></span>
+        {{ p.name }}
+      </mat-label>
+    </mat-option>
+    } @empty {
+    <mat-option disabled>No palettes available</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
 </div>

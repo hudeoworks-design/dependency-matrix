@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, viewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ThemeService } from '../../core/ThemeService';
@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { selectCurrentTheme, selectCurrentPalette } from '../../core/store';
 import { MatIcon } from "@angular/material/icon";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 @Component({
   selector: 'app-theme-switcher',
@@ -22,12 +23,14 @@ import { MatIcon } from "@angular/material/icon";
     MatCardModule,
     MatDividerModule,
     MatSlideToggleModule,
-    MatIcon
+    MatIcon,
+    MatGridListModule
 ]
 })
 export class ThemeSwitcherComponent {
   currentTheme$: Observable<string>;
   currentPalette$: Observable<string>;
+  paletteSelect = viewChild.required(MatSelect);
   palettes = [
     { name: 'Default', value: 'default', color: '#673ab7' }, // Indigo-ish
     { name: 'Blue', value: 'blue', color: '#2196f3' },
@@ -54,8 +57,8 @@ export class ThemeSwitcherComponent {
   }
 
   // Helper method to get the color string based on the selected value
-  getSelectedColor(selectedValue: string | undefined): string {
-    const selectedPalette = this.palettes.find(p => p.value === selectedValue);
-    return selectedPalette ? selectedPalette.color : '#FFFFFF'; // Fallback color
-  }
+  getSelectedColor = computed(() => {
+    const val = this.paletteSelect().value;
+    return this.palettes.find(p => p.value === val)?.color || '#FFFFFF';
+  });
 }
