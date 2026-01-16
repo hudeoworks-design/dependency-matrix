@@ -1,11 +1,63 @@
-<mat-form-field appearance="outline">
-  <mat-label>Theme</mat-label>
-  <mat-select
-    [value]="currentTheme$ | async"
-    (selectionChange)="onThemeChange($event)"
-  >
-    <mat-option value="light">Light Mode</mat-option>
-    <mat-option value="dark">Dark Mode</mat-option>
-    <mat-option value="orange">Orange Mode</mat-option>
-  </mat-select>
-</mat-form-field>
+<div>
+  <mat-form-field appearance="outline">
+    <mat-label>Theme</mat-label>
+    <mat-select
+      #themeSelect
+      [value]="currentTheme$ | async"
+      (selectionChange)="onThemeChange($event)"
+    >
+        <mat-select-trigger>
+        <mat-label style="align-items: center; gap: 8px; display: flex">
+          @if (themeSelect.value == 'light') {
+            <mat-icon> light_mode </mat-icon>
+          } @else {
+            <mat-icon> dark_mode </mat-icon>
+          }
+          {{ themeSelect.value | titlecase }}
+        </mat-label>
+      </mat-select-trigger>
+      <mat-option value="light">Light Mode</mat-option>
+      <mat-option value="dark">Dark Mode</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Color Palette</mat-label>
+    <mat-select
+      #paletteSelect
+      (selectionChange)="onColorPaletteChange($event)"
+      defaultValue="default"
+    >
+      <mat-select-trigger>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span
+            [style.background-color]="getSelectedColor(paletteSelect.value)"
+            style="width: 16px; height: 16px; border-radius: 50%"
+          ></span>
+          {{ paletteSelect.value | titlecase }}
+        </div>
+      </mat-select-trigger>
+
+      @for (p of palettes; track p.value) {
+      <mat-option [value]="p.value">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span
+            [style.background-color]="p.color"
+            style="
+              width: 20px;
+              height: 20px;
+              border-radius: 4px;
+              display: inline-block;
+            "
+          ></span>
+          {{ p.name }}
+        </div>
+      </mat-option>
+      } @empty {
+      <mat-option disabled>No palettes available</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>

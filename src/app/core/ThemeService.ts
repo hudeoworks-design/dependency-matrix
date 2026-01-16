@@ -1,16 +1,23 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { selectCurrentTheme } from './store/theme.selectors';
-import { setTheme } from './store/theme.actions';
+import {
+  selectCurrentTheme,
+  selectCurrentPalette,
+  setColorPalette,
+  setTheme,
+  colorPalettes
+} from './store';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   private renderer: Renderer2;
   private currentTheme$: Observable<string>;
+  private currentPalette$: Observable<string>;
+
 
   constructor(
     private rendererFactory: RendererFactory2,
@@ -19,17 +26,25 @@ export class ThemeService {
   ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     this.currentTheme$ = this.store.select(selectCurrentTheme);
-    this.currentTheme$.subscribe(theme => this.applyTheme(theme));
+    this.currentTheme$.subscribe((theme) => this.applyTheme(theme));
+    this.currentPalette$ = this.store.select(selectCurrentPalette);
+    this.currentPalette$.subscribe((palette) => this.applyPalette(palette));
+  }
+  applyPalette(palette: string): void {
+    // const htmlElement = document.documentElement;
+    const body = this.document.body;
+    this.renderer.setAttribute(body, 'theme', palette);
   }
 
   private applyTheme(theme: string): void {
     // Remove previous theme class if any
     const body = this.document.body;
-    body.classList.forEach(className => {
+
+    Array.from(body.classList).forEach(className => {
       if (className) {
         this.renderer.removeClass(body, className);
       }
-    });
+  });
 
     // Add the new theme class
     this.renderer.addClass(body, theme);
@@ -37,5 +52,11 @@ export class ThemeService {
 
   setTheme(theme: 'light' | 'dark'): void {
     this.store.dispatch(setTheme({ theme }));
+  }
+
+
+
+  setColorPalette(palette: colorPalettes): void {
+    this.store.dispatch(setColorPalette({ palette }));
   }
 }
