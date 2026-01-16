@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { themeReducer } from './core/store/theme.reducer';
+import { themeReducer, paletteReducer } from './core/store';
 import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
@@ -12,7 +12,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideStore({
-      theme: themeReducer
+      theme: themeReducer,
+      palette: paletteReducer
     }),
   ]
 };

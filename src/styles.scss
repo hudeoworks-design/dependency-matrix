@@ -1,51 +1,59 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use './app/styles/m3-theme' as theme; // Adjust path if needed
 
 @include mat.core();
 
-// Define Light Theme
-$light-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: theme.$primary-palette,
-    tertiary: theme.$tertiary-palette,
-  )
-));
+@mixin apply-theme-with-palette($palette) {
 
-// Define Dark Theme
-$dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: theme.$primary-palette,
-    tertiary: theme.$tertiary-palette,
-  )
-));
+  // Define Light Theme Configuration
+  $light-theme: mat.define-theme((
+    color: (
+      theme-type: light,
+      primary: $palette,
+      tertiary: theme.$tertiary-palette, // Replace with your actual tertiary
+    )
+  ));
 
-$orange-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: mat.$orange-palette,
-  ),
-  typography: (
-    brand-family: 'Comic Sans',
-    bold-weight: 900
-  ),
-  density: (
-    scale: -1
-  )
-));
+  // Define Dark Theme Configuration
+  $dark-theme: mat.define-theme((
+    color: (
+      theme-type: dark,
+      primary: $palette,
+      tertiary: theme.$tertiary-palette, // Replace with your actual tertiary
+    )
+  ));
 
-// Apply light theme by default
-body {
+  // Output Light Theme CSS
   @include mat.all-component-themes($light-theme);
 
-  // Apply dark theme when the class is present
+  // Output Dark Theme CSS when the .dark class is present
   &.dark {
     @include mat.all-component-colors($dark-theme);
   }
+}
 
-  &.orange {
-    @include mat.all-component-themes($orange-theme);
+// 1. Define a map of your theme names to their respective palettes
+$theme-palettes: (
+  "default": theme.$primary-palette,
+  "blue":   mat.$blue-palette,
+  "orange": mat.$orange-palette,
+  "red":    mat.$red-palette,
+  "violet": mat.$violet-palette,
+  "green":  mat.$green-palette,
+  "cyan":   mat.$cyan-palette,
+  "yellow":      mat.$yellow-palette,
+);
+
+// fallback to default theme
+body {
+  @include apply-theme-with-palette(map.get($theme-palettes, "default"));
+}
+
+// 2. Loop through the map
+@each $name, $palette in $theme-palettes {
+  body[theme="#{$name}"] {
+    @include apply-theme-with-palette($palette);
   }
 }
 
