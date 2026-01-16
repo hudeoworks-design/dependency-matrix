@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 // Material Imports
 import { MatCardModule } from "@angular/material/card";
@@ -13,7 +13,6 @@ import { ThemeSwitcherComponent } from "../theme-switcher/theme-switcher.compone
   selector: 'app-settings',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     MatDividerModule,
     MatSlideToggleModule,

@@ -5,11 +5,11 @@ export interface ThemeState {
   currentTheme: string;
 }
 
-export const initialState: ThemeState = {
+export const initialThemeState: ThemeState = {
   currentTheme: 'light'
 };
 
 export const themeReducer = createReducer(
-  initialState,
+  initialThemeState,
   on(setTheme, (state, { theme }) => ({ ...state, currentTheme: theme }))
 );
