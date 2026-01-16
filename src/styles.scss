@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use './app/styles/m3-theme' as theme; // Adjust path if needed
 
@@ -43,6 +44,11 @@ $theme-palettes: (
   "cyan":   mat.$cyan-palette,
   "yellow":      mat.$yellow-palette,
 );
+
+// fallback to default theme
+body {
+  @include apply-theme-with-palette(map.get($theme-palettes, "default"));
+}
 
 // 2. Loop through the map
 @each $name, $palette in $theme-palettes {

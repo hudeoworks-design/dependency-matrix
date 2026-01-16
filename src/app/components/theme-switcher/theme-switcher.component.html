@@ -6,13 +6,16 @@
       [value]="currentTheme$ | async"
       (selectionChange)="onThemeChange($event)"
     >
-        <mat-select-trigger>
-        <mat-label style="align-items: center; gap: 8px; display: flex">
-          @if (themeSelect.value == 'light') {
-            <mat-icon> light_mode </mat-icon>
-          } @else {
-            <mat-icon> dark_mode </mat-icon>
-          }
+      <mat-select-trigger>
+        <mat-label>
+          <mat-icon [style.color]="getSelectedColor(paletteSelect.value)">
+            @if (themeSelect.value == 'light') {
+              light_mode
+            } @else {
+              dark_mode
+            }
+          </mat-icon>
+
           {{ themeSelect.value | titlecase }}
         </mat-label>
       </mat-select-trigger>
@@ -28,32 +31,23 @@
     <mat-select
       #paletteSelect
       (selectionChange)="onColorPaletteChange($event)"
-      defaultValue="default"
+      [value]="currentPalette$ | async"
     >
       <mat-select-trigger>
-        <div style="display: flex; align-items: center; gap: 8px">
+        <mat-label>
           <span
             [style.background-color]="getSelectedColor(paletteSelect.value)"
-            style="width: 16px; height: 16px; border-radius: 50%"
           ></span>
           {{ paletteSelect.value | titlecase }}
-        </div>
+        </mat-label>
       </mat-select-trigger>
 
       @for (p of palettes; track p.value) {
       <mat-option [value]="p.value">
-        <div style="display: flex; align-items: center; gap: 10px">
-          <span
-            [style.background-color]="p.color"
-            style="
-              width: 20px;
-              height: 20px;
-              border-radius: 4px;
-              display: inline-block;
-            "
-          ></span>
+        <mat-label>
+          <span [style.background-color]="p.color"></span>
           {{ p.name }}
-        </div>
+        </mat-label>
       </mat-option>
       } @empty {
       <mat-option disabled>No palettes available</mat-option>

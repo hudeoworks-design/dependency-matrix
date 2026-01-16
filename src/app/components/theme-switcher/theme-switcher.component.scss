@@ -1,0 +1,24 @@
+mat-select-trigger mat-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+}
+
+mat-option mat-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+}
